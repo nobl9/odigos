@@ -58,6 +58,7 @@ var availableConfigers = []Configer{
 	&Middleware{},
 	&Mock{},
 	&NewRelic{},
+	&Nobl9SLIC{},
 	&Nop{},
 	&Observe{},
 	&OneUptime{},

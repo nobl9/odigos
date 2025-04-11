@@ -1,0 +1,42 @@
+apiVersion: internal.odigos.io/v1beta1
+kind: Destination
+metadata:
+  type: nobl9
+  displayName: Nobl9 SLIC
+  category: self hosted
+spec:
+  image: nobl9.svg
+  signals:
+    traces:
+      supported: true
+    metrics:
+      supported: true
+    logs:
+      supported: false
+  fields:
+    - name: NOBL9_SLIC_ENVIRONMENT
+      displayName: SLIC Environment
+      componentType: dropdown
+      componentProps:
+        required: true
+        tooltip: SLIC Environment
+        values:
+          - dev
+          - prod-app
+    - name: NOBL9_SLIC_CLIENT_ID
+      displayName: Client ID
+      componentType: input
+      componentProps:
+        type: text
+        required: true
+        placeholder: 'client_id'
+        tooltip: user Client ID
+    - name: NOBL9_SLIC_CLIENT_SECRET
+      displayName: Client Secret
+      componentType: input
+      componentProps:
+        type: password
+        required: true
+        placeholder: 'client_secret'
+        tooltip: user Client Secret
+      secret: true
