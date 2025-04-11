@@ -1,0 +1,107 @@
+---
+title: 'Nobl9 SLIC'
+description: 'Configuring the Nobl9 SLIC backend (Self-Hosted)'
+sidebarTitle: 'Nobl9 SLIC'
+icon: 'signal-stream'
+---
+
+### Getting Started
+
+<img src="https://d15jtxgb40qetw.cloudfront.net/nobl9.svg" alt="nobl9" className="not-prose h-20" />
+
+{/*
+    Add custom content here (under this comment)...
+
+    e.g.
+
+    **Creating Account**<br />
+    Go to the **[🔗 website](https://odigos.io) > Account** and click **Sign Up**
+
+    **Obtaining Access Token**<br />
+    Go to **⚙️ > Access Tokens** and click **Create New**
+
+    !! Do not remove this comment, this acts as a key indicator in `docs/sync-dest-doc.py` !!
+    !! START CUSTOM EDIT !!
+*/}title: "Nobl9"
+{/*
+    !! Do not remove this comment, this acts as a key indicator in `docs/sync-dest-doc.py` !!
+    !! END CUSTOM EDIT !!
+*/}
+
+### Configuring Destination Fields
+
+<Accordion title="Supported Signals:">
+  ✅ Traces
+  ✅ Metrics
+  ❌ Logs
+</Accordion>
+
+- **NOBL9_SLIC_INSTALLATION** `string` : SLIC Installation. SLIC installation
+  - This field is required
+- **NOBL9_SLIC_CLIENT_ID** `string` : Client ID. user Client ID
+  - This field is required
+  - Example: `client_id`
+- **NOBL9_SLIC_CLIENT_SECRET** `string` : Client Secret. user Client Secret
+  - This field is required
+  - Example: `client_secret`
+
+### Adding Destination to Odigos
+
+There are two primary methods for configuring destinations in Odigos:
+
+##### **Using the UI**
+
+<Steps>
+  <Step>
+    Use the [Odigos CLI](https://docs.odigos.io/cli/odigos_ui) to access the UI
+    ```bash
+    odigos ui
+    ```
+  </Step>
+  <Step>
+    Click on `Add Destination`, select `Nobl9 SLIC` and follow the on-screen instructions
+  </Step>
+</Steps>
+
+##### **Using Kubernetes manifests**
+
+<Steps>
+  <Step>
+    Save the YAML below to a file (e.g. `nobl9.yaml`)
+    ```yaml
+    apiVersion: odigos.io/v1alpha1
+    kind: Destination
+    metadata:
+      name: nobl9-example
+      namespace: odigos-system
+    spec:
+      data:
+        NOBL9_SLIC_CLIENT_ID: <Client ID>
+        NOBL9_SLIC_INSTALLATION: '<SLIC Installation (options: [dev, prod-app])>'
+      destinationName: nobl9
+      secretRef:
+        name: nobl9-secret
+      signals:
+      - TRACES
+      - METRICS
+      type: nobl9
+
+    ---
+
+    apiVersion: v1
+    data:
+      NOBL9_SLIC_CLIENT_SECRET: <Base64 Client Secret>
+    kind: Secret
+    metadata:
+      name: nobl9-secret
+      namespace: odigos-system
+    type: Opaque
+    ```
+  </Step>
+  <Step>
+    Apply the YAML using `kubectl`
+    ```bash
+    kubectl apply -f nobl9.yaml
+    ```
+  </Step>
+</Steps>

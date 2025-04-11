@@ -37,6 +37,7 @@ const (
 	JaegerDestinationType                 DestinationType = "jaeger"
 	KafkaDestinationType                  DestinationType = "kafka"
 	KloudMateDestinationType              DestinationType = "kloudmate"
+	Nobl9DestinationType                  DestinationType = "nobl9"
 	Last9DestinationType                  DestinationType = "last9"
 	LightstepDestinationType              DestinationType = "lightstep"
 	LogzioDestinationType                 DestinationType = "logzio"

@@ -259,6 +259,7 @@
             "backends/lumigo",
             "backends/middleware",
             "backends/newrelic",
+            "backends/nobl9",
             "backends/observe",
             "backends/oneuptime",
             "backends/openobserve",
